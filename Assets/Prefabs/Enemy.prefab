@@ -121,3 +121,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   obstacleRange: 5
+  bulletPrefab: {fileID: 8035972564857392279, guid: ccc2a8cb820273e4da66cd68a17a69f6,
+    type: 3}

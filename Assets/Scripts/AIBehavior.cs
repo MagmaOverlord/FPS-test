@@ -33,7 +33,9 @@ public class AIBehavior : MonoBehaviour
                 GameObject hitObject = hit.transform.gameObject;
 
                 if (hitObject.GetComponent<Player>()) {
-                    if (bullet = null) {
+                    //Debug.Log("I see you");
+                    if (bullet == null) {
+                        Debug.Log("I see you");
                         bullet = Instantiate(bulletPrefab) as GameObject;
                         bullet.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
                         bullet.transform.rotation = transform.rotation;
@@ -41,7 +43,7 @@ public class AIBehavior : MonoBehaviour
                 }
 
                 //check to see if we're close enough to turn around
-                if (hit.distance < obstacleRange)
+                else if (hit.distance < obstacleRange)
                 {
                     float angle = Random.Range(-179, 180);
                     transform.Rotate(0, angle, 0);
