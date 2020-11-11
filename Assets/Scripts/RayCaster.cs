@@ -23,10 +23,28 @@ public class RayCaster : MonoBehaviour
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit)) { // out modifier puts information into the variable hit (not exactly what it does but it does tahat in this context)
-                Debug.Log("Hit "+hit.point);
-                StartCoroutine(SphereIndicator(hit.point)); //a coroutine is essentially like a thread, enables us to run multiple functions at once and pause one without pausing others
+                GameObject hitObject = hit.transform.gameObject;
+                ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
+
+                if (target != null)
+                {
+                    Debug.Log("Hit Enemy");
+                    target.ReactToHit();
+                }
+                else {
+                    //Debug.Log("Hit " + hit.point);
+                    StartCoroutine(SphereIndicator(hit.point)); //a coroutine is essentially like a thread, enables us to run multiple functions at once and pause one without pausing others
+                }
             }
         }
+    }
+
+    private void OnGUI()
+    {
+        int size = 32;
+        float posX = _camera.pixelWidth / 2 - size / 4;
+        float posY = _camera.pixelHeight / 2 - size / 4;
+        GUI.Label(new Rect(posX, posY, size, size), "+");
     }
 
     //spawn a sphere at a position
